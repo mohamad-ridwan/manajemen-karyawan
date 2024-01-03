@@ -2,6 +2,8 @@
 
 import UseRegister from "./UseRegister";
 import FormDaftarAkun from "./FormDaftarAkun";
+import ModalForm from "./ModalForm";
+import { SelectOptT } from "@/utils/types";
 
 type Props ={
     params: {role: string}
@@ -19,11 +21,32 @@ export default function WrapRegister({
         clickShowPw,
         showConfirmPw,
         loadingSubmitPostUser,
-        clickSubmitFormAkun
+        clickSubmitFormAkun,
+        clickFormDataKaryawan,
+        onFormDataKaryawan,
+        dataSelectInput,
+        changeSelect,
+        changeInputDataKaryawan,
+        formValue,
+        errForm,
+        changeNumberInput,
+        onSelectedDateChanged
     } = UseRegister({params})
 
     return (
         <>
+            <ModalForm
+                openModal={onFormDataKaryawan}
+                closeModal={clickFormDataKaryawan}
+                dataSelectInput={dataSelectInput}
+                changeSelect={changeSelect}
+                changeInput={changeInputDataKaryawan}
+                changeNumberInput={changeNumberInput}
+                formValue={formValue}
+                errForm={errForm}
+                onSelectedDateChanged={onSelectedDateChanged}
+            />
+
             <FormDaftarAkun
                 daftarAkunValue={daftarAkunValue}
                 changeInput={changeInput}
@@ -35,6 +58,7 @@ export default function WrapRegister({
                 loadingSubmitFormAkun={loadingSubmitPostUser}
                 clickSubmitFormAkun={clickSubmitFormAkun}
                 currentRoute={params?.role as 'Admin'}
+                clickFormDataKaryawan={clickFormDataKaryawan}
             />
         </>
     )

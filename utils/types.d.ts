@@ -1,6 +1,11 @@
 import { CustomFlowbiteTheme } from 'flowbite-react'
 import { ReactElement, ReactNode } from 'react'
-import {IconType} from 'react-icons'
+import { IconType } from 'react-icons'
+
+export type SelectOptT = {
+    name: string
+    value: string | number
+}
 
 type MenuT = {
     name: string
@@ -32,6 +37,19 @@ export type UsersT = {
     password: string
     isVerification: string
     isDefaultAdmin: string
+}
+
+export type DataKaryawanT = {
+    id: string
+    jabatan: string
+    NIK: string
+    alamat: string
+    noTelp: string
+    tglLahir: string
+    divisi: string
+    gaji: string
+    tglBergabung: string
+    statusKaryawan: 'Aktif' | 'Tidak'
 }
 
 export type DataPopupModalT = {

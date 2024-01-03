@@ -30,10 +30,10 @@ export default function PopupModal({
                         {txtAsk}
                     </h3>
                     <div className='flex justify-center gap-4'>
-                        <Button color={colorBtnSubmit} className="py-[0.6rem]" onClick={clickNext}>
+                        <Button color={colorBtnSubmit} onClick={clickNext}>
                             {nameBtnSubmit}
                         </Button>
-                        <Button color="light" className="py-[0.6rem]" onClick={clickCancel}>
+                        <Button color="light" onClick={clickCancel}>
                             Batal
                         </Button>
                     </div>

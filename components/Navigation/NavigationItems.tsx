@@ -27,15 +27,19 @@ export default function NavigationItems({
                             {!isCollapseMenu ?
                                 <Link href={menu.path as string} className={`${pathname == menu.path ? 'text-gray-900' : 'text-gray-500'} w-full flex items-center p-2 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group mt-2`}>
                                     {menu.icon as ReactElement}
-                                    {menu.name}
+                                    <span className="text-gray-900">
+                                        {menu.name}
+                                    </span>
                                 </Link>
                                 :
-                                <Sidebar.Collapse icon={menu.icon as IconType} label={menu.name} className="mt-2" theme={customSidebarCollapse}>
+                                <Sidebar.Collapse icon={menu.icon as IconType} label={menu.name} className="mt-2">
                                     <div className="ml-3">
                                         {menu?.children?.map((childMenu, iChild) => (
                                             <Link key={iChild} href={childMenu.path as string} className={`${pathname == childMenu.path ? 'text-gray-900' : 'text-gray-500'} w-full flex items-center p-2 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group mt-2`}>
                                                 {childMenu.icon as ReactElement}
-                                                {childMenu.name}
+                                                <span className="text-gray-900">
+                                                    {childMenu.name}
+                                                </span>
                                             </Link>
                                         ))}
                                     </div>

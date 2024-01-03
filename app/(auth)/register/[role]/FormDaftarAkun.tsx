@@ -1,4 +1,4 @@
-import React, { ChangeEventHandler } from "react"
+import React, { CSSProperties, ChangeEventHandler } from "react"
 import InputForm from "@/components/Forms/InputForm"
 import { UsersT } from "@/utils/types"
 import { Button, Label } from "flowbite-react"
@@ -7,6 +7,8 @@ import { HiMiniEyeSlash } from "react-icons/hi2"
 import Link from "next/link"
 import { customButtonDefault } from "@/components/CustomTheme"
 import LoadingBtn from "@/components/LoadingBtn"
+import { CgCloseO } from "react-icons/cg";
+import { MdOutlineCheckCircle } from "react-icons/md";
 
 type Props = {
     daftarAkunValue: UsersT & {
@@ -15,14 +17,16 @@ type Props = {
     changeInput: ChangeEventHandler<HTMLInputElement>
     errFormDaftarAkun: UsersT & {
         confirmPassword: string
+        dataKaryawan: string
     }
     showPw: boolean
     showConfirmPw: boolean
-    pressEnter: (e: React.KeyboardEvent<HTMLInputElement>, type: 'Admin' | 'Karyawan')=>void
-    clickShowPw: (type: 'PASSWORD' | 'CONFIRM-PASSWORD')=>void
+    pressEnter: (e: React.KeyboardEvent<HTMLInputElement>, type: 'Admin' | 'Karyawan') => void
+    clickShowPw: (type: 'PASSWORD' | 'CONFIRM-PASSWORD') => void
     loadingSubmitFormAkun: boolean
-    clickSubmitFormAkun:(type: 'Admin' | 'Karyawan')=>void
+    clickSubmitFormAkun: (type: 'Admin' | 'Karyawan') => void
     currentRoute: 'Admin' | 'Karyawan'
+    clickFormDataKaryawan: () => void
 }
 
 export default function FormDaftarAkun({
@@ -35,8 +39,23 @@ export default function FormDaftarAkun({
     showConfirmPw,
     loadingSubmitFormAkun,
     clickSubmitFormAkun,
-    currentRoute
+    currentRoute,
+    clickFormDataKaryawan
 }: Props) {
+
+    const styleIconX: CSSProperties = {
+        height: '1.1rem',
+        width: '1.1rem',
+        color: 'rgb(220 38 38)',
+        marginRight: '0.3rem'
+    }
+    const styleIconSuccess: CSSProperties = {
+        height: '1.1rem',
+        width: '1.1rem',
+        color: 'rgb(34 197 94)',
+        marginRight: '0.3rem'
+    }
+
     return (
         <>
             <InputForm
@@ -48,7 +67,7 @@ export default function FormDaftarAkun({
                 classInput='mt-2'
                 changeInput={changeInput}
                 errMsg={errFormDaftarAkun.nama}
-                pressEnter={(e)=>pressEnter(e, currentRoute)}
+                pressEnter={(e) => pressEnter(e, currentRoute)}
             />
             <InputForm
                 type='email'
@@ -59,7 +78,7 @@ export default function FormDaftarAkun({
                 classInput='mt-2'
                 changeInput={changeInput}
                 errMsg={errFormDaftarAkun.email}
-                pressEnter={(e)=>pressEnter(e, currentRoute)}
+                pressEnter={(e) => pressEnter(e, currentRoute)}
             />
             <div className='mt-8'>
                 <Label value='Password' />
@@ -77,7 +96,7 @@ export default function FormDaftarAkun({
                     classWrap='w-full'
                     changeInput={changeInput}
                     errMsg={errFormDaftarAkun.password}
-                    pressEnter={(e)=>pressEnter(e, currentRoute)}
+                    pressEnter={(e) => pressEnter(e, currentRoute)}
                 />
 
                 <button className='absolute right-2' onClick={() => clickShowPw('PASSWORD')} style={{
@@ -111,7 +130,7 @@ export default function FormDaftarAkun({
                     classWrap='w-full'
                     changeInput={changeInput}
                     errMsg={errFormDaftarAkun.confirmPassword}
-                    pressEnter={(e)=>pressEnter(e, currentRoute)}
+                    pressEnter={(e) => pressEnter(e, currentRoute)}
                 />
 
                 <button className='absolute right-2' onClick={() => clickShowPw('CONFIRM-PASSWORD')} style={{
@@ -129,13 +148,27 @@ export default function FormDaftarAkun({
                     )}
                 </button>
             </div>
+            {currentRoute == 'Karyawan' &&
+                <div className="items-center flex flex-wrap">
+                    {errFormDaftarAkun?.dataKaryawan ?
+                        <CgCloseO style={styleIconX} />
+                        :
+                        <MdOutlineCheckCircle style={styleIconSuccess} />
+                    }
+
+                    <button className="text-gray-text" onClick={clickFormDataKaryawan}>
+                        Isi data Karyawan
+                    </button>
+                </div>
+            }
+
             <div className="flex items-center justify-end">
                 <Link href='/' className='text-sm text-gray-text'>
                     Kembali ke Beranda
                 </Link>
             </div>
             {!loadingSubmitFormAkun ? (
-                <Button onClick={()=>clickSubmitFormAkun(currentRoute)} theme={customButtonDefault} className='w-full'>
+                <Button onClick={() => clickSubmitFormAkun(currentRoute)} theme={customButtonDefault} className='w-full'>
                     Submit
                 </Button>
             ) : (
