@@ -34,6 +34,7 @@ export default function Form() {
                 classInput="mt-2"
                 changeInput={changeInput}
                 errMsg={errForm.email}
+                pressEnter={pressEnter}
             />
             <div className='relative items-center flex'>
                 <InputForm

@@ -1,3 +1,5 @@
+'use server'
+
 import { ReactNode } from "react"
 import AuthSession from "@/components/AuthSession"
 import authSessions from "@/lib/authSessions"

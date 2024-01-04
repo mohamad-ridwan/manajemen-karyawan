@@ -4,6 +4,8 @@ import HeaderVerifikasi from "@/app/(auth)/lupa-password/ganti-password/[jwt]/He
 import { getClient } from "@/lib/client";
 import { verifySchemas } from "@/lib/graphql/schemas/verify";
 
+export const dynamic = 'force-dynamic'
+
 const {
     validateVerify
 } = verifySchemas

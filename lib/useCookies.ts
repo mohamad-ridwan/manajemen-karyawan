@@ -8,8 +8,6 @@ export async function UseCookies(
     ){
     const cookieStore = cookies()
 
-    const getCookie = cookieStore.get('auth-id')
-
     if(token){
         cookieStore.set('auth-id', token)
     }
@@ -17,6 +15,8 @@ export async function UseCookies(
     if(isDeleteToken){
         cookieStore.delete('auth-id')
     }
+
+    const getCookie = cookieStore.get('auth-id')
     
     return {
         getCookie,

@@ -1,5 +1,4 @@
-import { useContext } from "react"
-import {useRouter} from 'next/navigation'
+import { useContext} from "react"
 import { NavigateContext } from "@/utils/context/NavigateContext"
 import { UseCookies } from "@/lib/useCookies"
 import { UsersContext } from "@/utils/context/UsersContext"
@@ -7,15 +6,20 @@ import { UsersContext } from "@/utils/context/UsersContext"
 export default function UseNavbar(){
     const navigateContext = useContext(NavigateContext)
     const usersContext = useContext(UsersContext)
-    const router = useRouter()
 
     function clickBtnNavbar(){
         navigateContext?.setActiveSideBar(!navigateContext.activeSideBar)
     }
 
-    function signOut(){
-        UseCookies(undefined, true)
-        router.push('/login')
+    async function getCookies():Promise<void>{
+        const {getCookie} = await UseCookies(undefined, true)
+        if(getCookie?.value?.length === 0){
+            window.location.href = '/login'
+        }
+    }
+
+    function signOut():void{
+        getCookies()
     }
 
     return {

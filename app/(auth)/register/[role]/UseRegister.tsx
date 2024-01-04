@@ -357,7 +357,7 @@ export default function UseRegister({
         if (dataPostKaryawan) {
             navigateContext?.setOnNotifAlert({
                 errMsg: <>
-                    Karyawan baru beranma <strong>
+                    Karyawan baru bernama <strong>
                         {daftarAkunValue.nama}
                     </strong> berhasil ditambahkan. <strong>Semoga harimu lancar selalu {':)'}</strong>
                 </>,
@@ -405,7 +405,7 @@ export default function UseRegister({
         if (errPostKaryawan?.networkError) {
             navigateContext?.setOnNotifConnection(true)
             setLoadingSubmitPostUser(false)
-        } else if ((errPostKaryawan?.clientErrors as [])?.length > 0) {
+        }else if (errPostKaryawan && errPostKaryawan?.graphQLErrors?.length < 10) {
             navigateContext?.setOnNotifAlert({
                 errMsg: 'Terjadi kesalahan server. Mohon coba lagi',
                 color: 'failure',
@@ -472,7 +472,7 @@ export default function UseRegister({
                 customTheme: customAlertFailure
             })
             setLoadingSubmitPostUser(false)
-        } else if (errPostUser) {
+        } else if (errPostUser && (errPostUser.graphQLErrors)?.length < 5) {
             navigateContext?.setOnNotifAlert({
                 errMsg: 'Terjadi kesalahan server. Mohon coba lagi',
                 color: 'failure',

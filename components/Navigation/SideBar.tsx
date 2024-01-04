@@ -17,7 +17,7 @@ export default function SideBar({
     const { usersContext } = UseNavigation()
     return (
         <>
-            {!usersContext?.loadingUsers ?
+            {usersContext?.users?.id ?
                 <Sidebar>
                     <NavigationItems
                         menuItems={(users as UsersT)?.role == 'User' ? menuItems : menuItemsAdmin}

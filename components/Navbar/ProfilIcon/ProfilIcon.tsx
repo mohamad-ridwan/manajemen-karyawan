@@ -8,13 +8,12 @@ import UseNavbar from "../UseNavbar"
 
 export default function ProfilIcon() {
     const {
-        signOut,
-        usersContext
+        usersContext,
+        signOut
     } = UseNavbar()
-
     return (
         <>
-            {!usersContext?.loadingUsers ?
+            {usersContext?.users?.id ?
                 <Dropdown
                     className="shadow-md rounded-md"
                     inline

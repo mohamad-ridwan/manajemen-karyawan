@@ -5,6 +5,8 @@ import { getClient } from "@/lib/client";
 import { verifySchemas } from "@/lib/graphql/schemas/verify"
 import Success from "./Success";
 
+export const dynamic = 'force-dynamic'
+
 const {
     validateVerify
 } = verifySchemas

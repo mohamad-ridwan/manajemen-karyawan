@@ -6,9 +6,9 @@ import { DataNotifAlert } from '@/utils/types'
 import { useLazyQuery } from '@apollo/client'
 import { usersSchemas } from '@/lib/graphql/schemas/users'
 import { UseCookies } from '@/lib/useCookies'
-import { useRouter } from 'next/navigation'
 import { UsersContext } from '@/utils/context/UsersContext'
 import { customAlertFailure } from '@/components/CustomTheme'
+// import {useSuspenseQuery} from '@apollo/experimental-nextjs-app-support/ssr'
 
 type LoginValueT = {
     email: string
@@ -43,12 +43,10 @@ export default function UseLogin() {
 
     const navigateContext = useContext(NavigateContext)
     const usersContext = useContext(UsersContext)
-    const router = useRouter()
 
     useEffect(() => {
         if (data) {
             UseCookies(data?.login?.token)
-            router.push('/')
         }
         return () => navigateContext?.setOnNotifAlert({} as DataNotifAlert)
     }, [data])
