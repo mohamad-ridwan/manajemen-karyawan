@@ -41,11 +41,11 @@ export default async function RootLayout({
       <body className={inter.className}>
         <WrapContext>
           <ApolloWrapper>
-            <AuthSession users={users} />
+            {/* <AuthSession users={users} /> */}
             <WrapPopupModal />
             <WrapNotifAlert />
             <WrapNotifConnection />
-            <WrapNavigation
+            {/* <WrapNavigation
               users={users}
               headNavigation={<HeadNavigation logo={logo} />}
             >
@@ -53,7 +53,7 @@ export default async function RootLayout({
                 users={users}
                 headNavigation={<HeadNavigation logo={logo} />}
               />
-            </WrapNavigation>
+            </WrapNavigation> */}
             {children}
           </ApolloWrapper>
         </WrapContext>
