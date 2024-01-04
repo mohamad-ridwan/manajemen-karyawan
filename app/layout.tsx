@@ -36,18 +36,6 @@ export default async function RootLayout({
 }) {
   const users = await authSessions()
 
-  function RenderNavigation() {
-    return <WrapNavigation
-      users={users}
-      headNavigation={<HeadNavigation logo={logo} />}
-    >
-      <NavDesktop
-        users={users}
-        headNavigation={<HeadNavigation logo={logo} />}
-      />
-    </WrapNavigation>
-  }
-
   return (
     <html lang="en">
       <body className={inter.className}>
@@ -57,7 +45,15 @@ export default async function RootLayout({
             <WrapPopupModal />
             <WrapNotifAlert />
             <WrapNotifConnection />
-            <RenderNavigation />
+            <WrapNavigation
+              users={users}
+              headNavigation={<HeadNavigation logo={logo} />}
+            >
+              <NavDesktop
+                users={users}
+                headNavigation={<HeadNavigation logo={logo} />}
+              />
+            </WrapNavigation>
             {children}
           </ApolloWrapper>
         </WrapContext>

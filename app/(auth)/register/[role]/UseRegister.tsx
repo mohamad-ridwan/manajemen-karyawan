@@ -405,7 +405,7 @@ export default function UseRegister({
         if (errPostKaryawan?.networkError) {
             navigateContext?.setOnNotifConnection(true)
             setLoadingSubmitPostUser(false)
-        } else if ((errPostKaryawan?.clientErrors as []).length > 0) {
+        } else if ((errPostKaryawan?.clientErrors as [])?.length > 0) {
             navigateContext?.setOnNotifAlert({
                 errMsg: 'Terjadi kesalahan server. Mohon coba lagi',
                 color: 'failure',
