@@ -67,6 +67,7 @@ export default function AuthSession({
         ) {
             getSession()
         }
+        console.log('current-user', users)
     }, [users])
 
     return <></>
