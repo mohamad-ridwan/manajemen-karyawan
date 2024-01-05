@@ -4,7 +4,7 @@ import HeaderVerifikasi from "@/app/(auth)/lupa-password/ganti-password/[jwt]/He
 import { getClient } from "@/lib/client";
 import { verifySchemas } from "@/lib/graphql/schemas/verify";
 import LoadingBtn from "@/components/Loaders/LoadingBtn";
-import { classModalIcon, customButtonDefault, customInput, customSpinnerInfo } from "@/components/CustomTheme";
+import { classModalIcon, customAlertFailure, customAlertSuccess, customButtonDefault, customInput, customSpinnerInfo } from "@/components/CustomTheme";
 import BtnBackOfForm from "@/components/Forms/BtnBackOfForm";
 import SkeletonVerify from "@/components/Loaders/SkeletonVerify";
 import Success from "@/app/(auth)/lupa-password/ganti-password/[jwt]/Success";
@@ -92,6 +92,9 @@ export default async function Verifikasi({
                         classModalIcon={classModalIcon}
                     />
                 }
+                classModalIcon={classModalIcon}
+                customAlertFailure={customAlertFailure}
+                customAlertSuccess={customAlertSuccess}
             />
         </Auth>
     )

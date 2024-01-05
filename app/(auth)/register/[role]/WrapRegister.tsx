@@ -5,6 +5,7 @@ import UseRegister from "./UseRegister";
 import FormDaftarAkun from "./FormDaftarAkun";
 import ModalForm from "./ModalForm";
 import { CustomFlowbiteTheme } from "flowbite-react";
+import { ClassModalIconT } from "@/utils/types";
 
 type Props ={
     params: {role: string}
@@ -13,6 +14,9 @@ type Props ={
     customBtnDefault: CustomFlowbiteTheme['button']
     btnBack: ReactNode
     customPopupModal: CustomFlowbiteTheme['modal']
+    classModalIcon: ClassModalIconT
+    customAlertFailure: CustomFlowbiteTheme['alert']
+    customAlertSuccess: CustomFlowbiteTheme['alert']
 }
 
 export default function WrapRegister({
@@ -21,7 +25,10 @@ export default function WrapRegister({
     loadingBtn,
     customBtnDefault,
     btnBack,
-    customPopupModal
+    customPopupModal,
+    classModalIcon,
+    customAlertFailure,
+    customAlertSuccess
 }: Props) {
     const {
         daftarAkunValue,
@@ -42,7 +49,13 @@ export default function WrapRegister({
         errForm,
         changeNumberInput,
         onSelectedDateChanged
-    } = UseRegister({params})
+    } = UseRegister({
+        params,
+        classModalIcon,
+        customAlertFailure,
+        customAlertSuccess,
+        customButtonDefault: customBtnDefault
+    })
 
     return (
         <>

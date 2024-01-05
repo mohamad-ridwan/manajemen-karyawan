@@ -1,6 +1,6 @@
 import Auth from "@/components/Auth";
 import WrapRegister from "./WrapRegister";
-import { customButtonDefault, customInput, customPopupModal } from "@/components/CustomTheme";
+import { classModalIcon, customAlertFailure, customAlertSuccess, customButtonDefault, customInput, customPopupModal } from "@/components/CustomTheme";
 import LoadingBtn from "@/components/Loaders/LoadingBtn";
 import BtnBackOfForm from "@/components/Forms/BtnBackOfForm";
 
@@ -30,6 +30,9 @@ export default async function Register({
                         btnName="Kembali ke Beranda"
                     />
                 }
+                classModalIcon={classModalIcon}
+                customAlertFailure={customAlertFailure}
+                customAlertSuccess={customAlertSuccess}
             />
         </Auth>
     )

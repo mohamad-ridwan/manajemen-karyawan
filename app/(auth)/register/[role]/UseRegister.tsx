@@ -1,13 +1,12 @@
 import React, { ChangeEvent, useContext, useEffect, useState } from "react"
-import { DataKaryawanT, DataNotifAlert, DataPopupModalT, SelectOptT, UsersT } from "@/utils/types"
+import { ClassModalIconT, DataKaryawanT, DataNotifAlert, DataPopupModalT, SelectOptT, UsersT } from "@/utils/types"
 import { useRouter } from "next/navigation"
 import { NavigateContext } from "@/utils/context/NavigateContext"
-import { classModalIcon, customAlertFailure, customAlertSuccess, customButtonDefault } from "@/components/CustomTheme"
 import regex from "@/utils/regex"
 import { TiUserAdd } from "react-icons/ti";
 import { useLazyQuery } from "@apollo/client"
 import { usersSchemas } from "@/lib/graphql/schemas/users"
-import { Button } from "flowbite-react"
+import { Button, CustomFlowbiteTheme } from "flowbite-react"
 import sendMail from "@/lib/emailjs/sendMail"
 import { queryEmailjs } from "@/lib/emailjs/querys"
 import { EmailJSResponseStatus } from "@emailjs/browser"
@@ -17,6 +16,10 @@ import dateFormat from "@/utils/format/dateFormat"
 
 type Props = {
     params: { role: string }
+    classModalIcon: ClassModalIconT
+    customAlertFailure: CustomFlowbiteTheme['alert']
+    customAlertSuccess: CustomFlowbiteTheme['alert']
+    customButtonDefault: CustomFlowbiteTheme['button']
 }
 
 const {
@@ -28,7 +31,11 @@ const {
 } = karyawanSchemas
 
 export default function UseRegister({
-    params
+    params,
+    classModalIcon,
+    customAlertFailure,
+    customAlertSuccess,
+    customButtonDefault
 }: Props) {
     const [daftarAkunValue, setDaftarAkunValue] = useState<UsersT & {
         confirmPassword: string

@@ -4,6 +4,7 @@ import { ReactNode } from "react"
 import Verifikasi from "@/app/(auth)/lupa-password/ganti-password/[jwt]/Verifikasi"
 import UseVerifikasi from "./UseVerifikasi"
 import { CustomFlowbiteTheme } from "flowbite-react"
+import { ClassModalIconT } from "@/utils/types"
 
 type Props = {
     data: { email: string, id: string } | 'exp' | 'network error'
@@ -16,6 +17,9 @@ type Props = {
     customBtnDefault: CustomFlowbiteTheme['button']
     skeletonVerify: ReactNode
     isSuccessVerify: ReactNode
+    classModalIcon: ClassModalIconT
+    customAlertFailure: CustomFlowbiteTheme['alert']
+    customAlertSuccess: CustomFlowbiteTheme['alert']
 }
 
 export default function Form({
@@ -28,7 +32,10 @@ export default function Form({
     customSpinnerInfo,
     customBtnDefault,
     skeletonVerify,
-    isSuccessVerify
+    isSuccessVerify,
+    customAlertFailure,
+    customAlertSuccess,
+    classModalIcon
 }: Props) {
     const {
         kodeValue,
@@ -40,7 +47,14 @@ export default function Form({
         loadingResendMail,
         successVerify,
         loadingVerify
-    } = UseVerifikasi({ data, jwt })
+    } = UseVerifikasi({ 
+        data, 
+        jwt,
+        classModalIcon,
+        customAlertFailure,
+        customAlertSuccess,
+        customButtonDefault: customBtnDefault
+    })
     return (
         <>
             {!successVerify ? <>

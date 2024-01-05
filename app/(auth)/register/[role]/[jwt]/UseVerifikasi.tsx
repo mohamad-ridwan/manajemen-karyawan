@@ -1,20 +1,22 @@
-import { classModalIcon, customAlertFailure, customAlertSuccess, customButtonDefault } from "@/components/CustomTheme"
+import React, { ChangeEvent, useContext, useEffect, useState } from "react"
 import { queryEmailjs } from "@/lib/emailjs/querys"
 import sendMail from "@/lib/emailjs/sendMail"
 import { verifySchemas } from "@/lib/graphql/schemas/verify"
 import { NavigateContext } from "@/utils/context/NavigateContext"
-import { DataNotifAlert, DataPopupModalT } from "@/utils/types"
+import { ClassModalIconT, DataNotifAlert, DataPopupModalT } from "@/utils/types"
 import { useLazyQuery } from "@apollo/client"
 import { EmailJSResponseStatus } from "@emailjs/browser"
-import { Button } from "flowbite-react"
+import { Button, CustomFlowbiteTheme } from "flowbite-react"
 import { useRouter } from "next/navigation"
-import React, { ChangeEvent, useContext, useEffect, useState } from "react"
-import { IoKeyOutline } from "react-icons/io5"
 import { MdOutlineMail } from "react-icons/md"
 
 type Props = {
     data: { email: string, id: string } | 'exp' | 'network error'
     jwt: string
+    classModalIcon: ClassModalIconT
+    customAlertFailure: CustomFlowbiteTheme['alert']
+    customAlertSuccess: CustomFlowbiteTheme['alert']
+    customButtonDefault: CustomFlowbiteTheme['button']
 }
 
 const {
@@ -24,7 +26,11 @@ const {
 
 export default function UseVerifikasi({
     data,
-    jwt
+    jwt,
+    classModalIcon,
+    customAlertFailure,
+    customAlertSuccess,
+    customButtonDefault
 }: Props){
     const [kodeValue, setKodeValue] = useState<string>('')
     const [errForm, setErrForm] = useState<string>('')
