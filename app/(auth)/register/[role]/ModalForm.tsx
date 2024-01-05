@@ -1,10 +1,9 @@
 import { ChangeEventHandler } from "react";
-import { Button, Modal } from "flowbite-react";
+import { Button, CustomFlowbiteTheme, Modal } from "flowbite-react";
 import SelectInput from "@/components/Forms/SelectInput";
 import { DataKaryawanT, SelectOptT } from "@/utils/types";
 import InputForm from "@/components/Forms/InputForm";
 import DateInput from "@/components/Forms/DateInput";
-import { customButtonDefault, customPopupModal } from "@/components/CustomTheme";
 
 type Props = {
     openModal: boolean
@@ -16,6 +15,9 @@ type Props = {
     dataSelectInput: { [key: string]: SelectOptT[] }
     changeNumberInput: ChangeEventHandler<HTMLInputElement>
     onSelectedDateChanged: (e: Date, nameInput: 'tglLahir' | 'tglBergabung')=>void
+    customInput: CustomFlowbiteTheme['textInput']
+    customBtnDefault: CustomFlowbiteTheme['button']
+    customPopupModal: CustomFlowbiteTheme['modal']
 }
 
 export default function ModalForm({
@@ -28,6 +30,9 @@ export default function ModalForm({
     dataSelectInput,
     changeNumberInput,
     onSelectedDateChanged,
+    customInput,
+    customBtnDefault,
+    customPopupModal
 }: Props) {
     return (
         <Modal
@@ -52,6 +57,7 @@ export default function ModalForm({
                         data={dataSelectInput.jabatan}
                         changeSelect={changeSelect}
                         errMsg={errForm.jabatan}
+                        customInput={customInput}
                     />
                     <InputForm
                         label="NIK"
@@ -63,6 +69,7 @@ export default function ModalForm({
                         classWrap="mt-6"
                         changeInput={changeNumberInput}
                         placeholder="NIK 16 digit"
+                        customInput={customInput}
                     />
                     <InputForm
                         label="Alamat Rumah"
@@ -74,6 +81,7 @@ export default function ModalForm({
                         classWrap="mt-6"
                         changeInput={changeInput}
                         placeholder="Jl. Sunan Muria VII Blok G"
+                        customInput={customInput}
                     />
                     <InputForm
                         label="No. Telp"
@@ -85,6 +93,7 @@ export default function ModalForm({
                         classWrap="mt-6"
                         changeInput={changeNumberInput}
                         placeholder="08134..."
+                        customInput={customInput}
                     />
                     <DateInput
                         maxDate={new Date()}
@@ -104,6 +113,7 @@ export default function ModalForm({
                         data={dataSelectInput.divisi}
                         changeSelect={changeSelect}
                         errMsg={errForm.divisi}
+                        customInput={customInput}
                     />
                     <InputForm
                         label="Gaji"
@@ -115,6 +125,7 @@ export default function ModalForm({
                         classWrap="mt-6"
                         changeInput={changeNumberInput}
                         placeholder="Gaji Karyawan"
+                        customInput={customInput}
                     />
                     <DateInput
                         maxDate={new Date()}
@@ -134,8 +145,9 @@ export default function ModalForm({
                         data={dataSelectInput.statusKaryawan}
                         changeSelect={changeSelect}
                         errMsg={errForm.statusKaryawan}
+                        customInput={customInput}
                     />
-                    <Button theme={customButtonDefault} className="w-full mt-4" onClick={closeModal}>
+                    <Button theme={customBtnDefault} className="w-full mt-4" onClick={closeModal}>
                         Tutup
                     </Button>
                 </div>

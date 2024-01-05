@@ -1,6 +1,12 @@
-import { CustomFlowbiteTheme } from 'flowbite-react'
 import { ReactElement, ReactNode } from 'react'
+import { CustomFlowbiteTheme } from 'flowbite-react'
 import { IconType } from 'react-icons'
+
+export type UpdateInfoProfilT = {
+    fotoProfil: string
+    nama: string
+    email: string
+}
 
 export type SelectOptT = {
     name: string

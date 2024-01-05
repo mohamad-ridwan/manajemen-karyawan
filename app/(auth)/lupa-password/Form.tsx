@@ -1,13 +1,30 @@
 'use client'
 
-import Link from "next/link"
-import { Button } from "flowbite-react"
+import { ReactNode } from "react"
+import { Button, CustomFlowbiteTheme } from "flowbite-react"
 import InputForm from "@/components/Forms/InputForm"
 import UseLupaPassword from "./UseLupaPassword"
-import LoadingBtn from "@/components/LoadingBtn"
-import { customButtonDefault } from "@/components/CustomTheme"
+import { ClassModalIconT } from "@/utils/types"
 
-export default function Form() {
+type Props = {
+    loadingBtn: ReactNode
+    btnBack: ReactNode
+    customInput: CustomFlowbiteTheme['textInput']
+    customBtnDefault: CustomFlowbiteTheme['button']
+    classModalIcon: ClassModalIconT
+    customAlertFailure: CustomFlowbiteTheme['alert']
+    customAlertSuccess: CustomFlowbiteTheme['alert']
+}
+
+export default function Form({
+    loadingBtn,
+    btnBack,
+    customInput,
+    customBtnDefault,
+    classModalIcon,
+    customAlertFailure,
+    customAlertSuccess,
+}: Props) {
     const {
         changeInput,
         inputValue,
@@ -15,7 +32,12 @@ export default function Form() {
         errForm,
         pressEnter,
         loading
-    } = UseLupaPassword()
+    } = UseLupaPassword({
+        classModalIcon,
+        customAlertFailure,
+        customAlertSuccess,
+        customButtonDefault: customBtnDefault
+    })
     return (
         <>
             <InputForm
@@ -28,18 +50,15 @@ export default function Form() {
                 errMsg={errForm?.email}
                 changeInput={changeInput}
                 pressEnter={pressEnter}
+                customInput={customInput}
             />
-            <div className="flex items-center justify-end">
-                <Link href='/login' className='text-sm text-gray-text'>
-                    Kembali ke Login
-                </Link>
-            </div>
+            {btnBack}
             {!loading ? (
-                <Button theme={customButtonDefault} onClick={clickSubmit} className='w-full'>
+                <Button theme={customBtnDefault} onClick={clickSubmit} className='w-full'>
                     Kirim
                 </Button>
             ) : (
-                <LoadingBtn theme={customButtonDefault} color='info' className='w-full' />
+                <>{loadingBtn}</>
             )}
         </>
     )

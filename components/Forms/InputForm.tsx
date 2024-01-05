@@ -1,6 +1,6 @@
 import { ChangeEventHandler, KeyboardEventHandler } from "react"
-import { Label, TextInput } from "flowbite-react"
-import { customInput } from "@/components/CustomTheme"
+import { CustomFlowbiteTheme, Label, TextInput } from "flowbite-react"
+// import { customInput } from "@/components/CustomTheme"
 
 type Props = {
     classWrap?: string
@@ -18,6 +18,7 @@ type Props = {
     changeInput?: ChangeEventHandler<HTMLInputElement | HTMLSelectElement>
     placeholder?: string
     pressEnter?: KeyboardEventHandler<HTMLInputElement>
+    customInput: CustomFlowbiteTheme['textInput']
 }
 
 export default function InputForm({
@@ -35,7 +36,8 @@ export default function InputForm({
     changeInput,
     placeholder,
     pressEnter,
-    maxLength
+    maxLength,
+    customInput
 }: Props) {
     return (
         <div className={`flex flex-col ${classWrap}`}>

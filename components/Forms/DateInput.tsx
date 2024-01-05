@@ -1,5 +1,4 @@
-import { Datepicker, DatepickerProps, Label } from "flowbite-react";
-// import { customThemeDatePicker } from "../CustomTheme";
+import { Datepicker, Label } from "flowbite-react";
 
 type Props = {
     maxDate?: Date

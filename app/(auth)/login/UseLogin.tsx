@@ -7,8 +7,7 @@ import { useLazyQuery } from '@apollo/client'
 import { usersSchemas } from '@/lib/graphql/schemas/users'
 import { UseCookies } from '@/lib/useCookies'
 import { UsersContext } from '@/utils/context/UsersContext'
-import { customAlertFailure } from '@/components/CustomTheme'
-// import {useSuspenseQuery} from '@apollo/experimental-nextjs-app-support/ssr'
+import { CustomFlowbiteTheme } from 'flowbite-react'
 
 type LoginValueT = {
     email: string
@@ -19,7 +18,13 @@ const {
     loginQuery
 } = usersSchemas
 
-export default function UseLogin() {
+type Props = {
+    customAlertFailure: CustomFlowbiteTheme['alert']
+}
+
+export default function UseLogin({
+    customAlertFailure,
+}: Props) {
     const [loginValue, setLoginValue] = useState<LoginValueT>({
         email: '',
         password: ''
@@ -82,13 +87,13 @@ export default function UseLogin() {
         }
     }
 
-    useEffect(()=>{
-        if(loginResult.email.trim()){
+    useEffect(() => {
+        if (loginResult.email.trim()) {
             loginResolver()
         }
     }, [loginResult])
 
-    function clickSubmit():void{
+    function clickSubmit(): void {
         if (!usersContext?.loadingUsers && !loading && validateForm()) {
             setLoginResult(loginValue)
         }

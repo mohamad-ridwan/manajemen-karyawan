@@ -15,7 +15,16 @@ export default function LoadingBtn({
 }: Props) {
     return (
         <Button color={color} size={size} theme={theme} className={className} disabled>
-            <Spinner size="sm" color="info" className="animate-spin" />
+            <Spinner
+                size="sm"
+                color="info"
+                className="animate-spin"
+                theme={{
+                    size:{
+                        sm: 'w-4 h-4'
+                    }
+                }}
+            />
             <span className="pl-3">Loading...</span>
         </Button>
     )

@@ -6,7 +6,6 @@ import { MenuItemsT } from "@/utils/types";
 import Link from "next/link";
 import { IconType } from "react-icons";
 import { usePathname } from "next/navigation";
-import { customSidebarCollapse } from "../CustomTheme";
 
 type Props = {
     menuItems: MenuItemsT[]

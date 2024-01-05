@@ -4,6 +4,10 @@ import HeaderVerifikasi from "./HeaderVerifikasi";
 import { getClient } from "@/lib/client";
 import { verifySchemas } from "@/lib/graphql/schemas/verify"
 import Success from "./Success";
+import LoadingBtn from "@/components/Loaders/LoadingBtn";
+import { classModalIcon, customAlertFailure, customAlertSuccess, customButtonDefault, customInput, customSpinnerInfo } from "@/components/CustomTheme";
+import SkeletonVerify from "@/components/Loaders/SkeletonVerify";
+import BtnBackOfForm from "@/components/Forms/BtnBackOfForm";
 
 export const dynamic = 'force-dynamic'
 
@@ -54,8 +58,41 @@ export default async function GantiPassword({
         <Auth>
             <WrapVerifikasi
                 data={data}
-                header={<HeaderVerifikasi email={(data as { email: string })?.email} />}
-                isSuccessResetPw={<Success/>}
+                header={
+                    <HeaderVerifikasi
+                        email={(data as { email: string })?.email}
+                    />
+                }
+                isSuccessResetPw={
+                    <Success
+                        classModalIcon={classModalIcon}
+                        customBtnDefault={customButtonDefault}
+                    />
+                }
+                loadingBtnVerify={
+                    <LoadingBtn color='info' theme={customButtonDefault} className='w-full' />
+                }
+                skeletonVerify={
+                    <SkeletonVerify />
+                }
+                btnBackVerify={
+                    <BtnBackOfForm
+                        href="/"
+                        btnName="Kembali ke Beranda"
+                    />
+                }
+                btnBackGantiPw={
+                    <BtnBackOfForm
+                        href="/login"
+                        btnName="Kembali ke Login"
+                    />
+                }
+                customInput={customInput}
+                customBtnDefault={customButtonDefault}
+                customSpinnerInfo={customSpinnerInfo}
+                customAlertFailure={customAlertFailure}
+                customAlertSuccess={customAlertSuccess}
+                classModalIcon={classModalIcon}
             />
         </Auth>
     )

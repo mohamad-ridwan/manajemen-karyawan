@@ -1,9 +1,6 @@
-import { customButtonDefault } from "@/components/CustomTheme";
+import { ChangeEventHandler, KeyboardEventHandler, ReactNode } from "react";
 import InputForm from "@/components/Forms/InputForm";
-import LoadingBtn from "@/components/LoadingBtn";
-import { Button, Label } from "flowbite-react";
-import Link from "next/link";
-import { ChangeEventHandler, KeyboardEventHandler } from "react";
+import { Button, CustomFlowbiteTheme, Label } from "flowbite-react";
 import { HiMiniEyeSlash } from "react-icons/hi2";
 import { IoEyeSharp } from "react-icons/io5";
 
@@ -17,11 +14,15 @@ type Props = {
     formGantiPassword: NewPasswordT
     changeInputGantiPw: ChangeEventHandler<HTMLInputElement>
     errFormGantiPw: NewPasswordT
-    clickShowPw:(type: 'NEW-PASSWORD' | 'CONFIRM-PASSWORD')=>void
+    clickShowPw: (type: 'NEW-PASSWORD' | 'CONFIRM-PASSWORD') => void
     showConfirmPw: boolean
     loadingSubmitGantiPw: boolean
-    clickSubmitGantiPw: ()=>void
+    clickSubmitGantiPw: () => void
     pressEnter: KeyboardEventHandler<HTMLInputElement>
+    loadingBtnGantiPw: ReactNode
+    btnBackGantiPw: ReactNode
+    customInput: CustomFlowbiteTheme['textInput']
+    customBtnDefault: CustomFlowbiteTheme['button']
 }
 
 export default function FormGantiPassword({
@@ -33,11 +34,15 @@ export default function FormGantiPassword({
     showConfirmPw,
     loadingSubmitGantiPw,
     clickSubmitGantiPw,
-    pressEnter
-}:Props){
+    pressEnter,
+    loadingBtnGantiPw,
+    btnBackGantiPw,
+    customInput,
+    customBtnDefault
+}: Props) {
     return (
         <>
-        <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-text md:text-2xl dark:text-white">
+            <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-text md:text-2xl dark:text-white">
                 Ganti Password Anda
             </h1>
             <div className='mt-8'>
@@ -57,6 +62,7 @@ export default function FormGantiPassword({
                     changeInput={changeInputGantiPw}
                     errMsg={errFormGantiPw.newPassword}
                     pressEnter={pressEnter}
+                    customInput={customInput}
                 />
 
                 <button className='absolute right-2' onClick={() => clickShowPw('NEW-PASSWORD')} style={{
@@ -91,6 +97,7 @@ export default function FormGantiPassword({
                     changeInput={changeInputGantiPw}
                     errMsg={errFormGantiPw.confirmPassword}
                     pressEnter={pressEnter}
+                    customInput={customInput}
                 />
 
                 <button className='absolute right-2' onClick={() => clickShowPw('CONFIRM-PASSWORD')} style={{
@@ -108,17 +115,13 @@ export default function FormGantiPassword({
                     )}
                 </button>
             </div>
-            <div className="flex items-center justify-end">
-                <Link href='/login' className='text-sm text-gray-text'>
-                    Kembali ke Login
-                </Link>
-            </div>
+            {btnBackGantiPw}
             {!loadingSubmitGantiPw ? (
-                <Button onClick={clickSubmitGantiPw} theme={customButtonDefault} className='w-full'>
+                <Button onClick={clickSubmitGantiPw} theme={customBtnDefault} className='w-full'>
                     Ganti Password
                 </Button>
             ) : (
-                <LoadingBtn color='info' theme={customButtonDefault} className='w-full' />
+                <>{loadingBtnGantiPw}</>
             )}
         </>
     )

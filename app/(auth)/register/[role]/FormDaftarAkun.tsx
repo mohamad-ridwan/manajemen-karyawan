@@ -1,12 +1,9 @@
-import React, { CSSProperties, ChangeEventHandler } from "react"
+import React, { CSSProperties, ChangeEventHandler, ReactNode } from "react"
 import InputForm from "@/components/Forms/InputForm"
 import { UsersT } from "@/utils/types"
-import { Button, Label } from "flowbite-react"
+import { Button, CustomFlowbiteTheme, Label } from "flowbite-react"
 import { IoEyeSharp } from "react-icons/io5"
 import { HiMiniEyeSlash } from "react-icons/hi2"
-import Link from "next/link"
-import { customButtonDefault } from "@/components/CustomTheme"
-import LoadingBtn from "@/components/LoadingBtn"
 import { CgCloseO } from "react-icons/cg";
 import { MdOutlineCheckCircle } from "react-icons/md";
 
@@ -27,6 +24,10 @@ type Props = {
     clickSubmitFormAkun: (type: 'Admin' | 'Karyawan') => void
     currentRoute: 'Admin' | 'Karyawan'
     clickFormDataKaryawan: () => void
+    customInput: CustomFlowbiteTheme['textInput']
+    loadingBtn: ReactNode
+    customBtnDefault: CustomFlowbiteTheme['button']
+    btnBack: ReactNode
 }
 
 export default function FormDaftarAkun({
@@ -40,7 +41,11 @@ export default function FormDaftarAkun({
     loadingSubmitFormAkun,
     clickSubmitFormAkun,
     currentRoute,
-    clickFormDataKaryawan
+    clickFormDataKaryawan,
+    customInput,
+    loadingBtn,
+    customBtnDefault,
+    btnBack
 }: Props) {
 
     const styleIconX: CSSProperties = {
@@ -68,6 +73,7 @@ export default function FormDaftarAkun({
                 changeInput={changeInput}
                 errMsg={errFormDaftarAkun.nama}
                 pressEnter={(e) => pressEnter(e, currentRoute)}
+                customInput={customInput}
             />
             <InputForm
                 type='email'
@@ -79,6 +85,7 @@ export default function FormDaftarAkun({
                 changeInput={changeInput}
                 errMsg={errFormDaftarAkun.email}
                 pressEnter={(e) => pressEnter(e, currentRoute)}
+                customInput={customInput}
             />
             <div className='mt-8'>
                 <Label value='Password' />
@@ -97,6 +104,7 @@ export default function FormDaftarAkun({
                     changeInput={changeInput}
                     errMsg={errFormDaftarAkun.password}
                     pressEnter={(e) => pressEnter(e, currentRoute)}
+                    customInput={customInput}
                 />
 
                 <button className='absolute right-2' onClick={() => clickShowPw('PASSWORD')} style={{
@@ -131,6 +139,7 @@ export default function FormDaftarAkun({
                     changeInput={changeInput}
                     errMsg={errFormDaftarAkun.confirmPassword}
                     pressEnter={(e) => pressEnter(e, currentRoute)}
+                    customInput={customInput}
                 />
 
                 <button className='absolute right-2' onClick={() => clickShowPw('CONFIRM-PASSWORD')} style={{
@@ -162,17 +171,13 @@ export default function FormDaftarAkun({
                 </div>
             }
 
-            <div className="flex items-center justify-end">
-                <Link href='/' className='text-sm text-gray-text'>
-                    Kembali ke Beranda
-                </Link>
-            </div>
+            {btnBack}
             {!loadingSubmitFormAkun ? (
-                <Button onClick={() => clickSubmitFormAkun(currentRoute)} theme={customButtonDefault} className='w-full'>
+                <Button onClick={() => clickSubmitFormAkun(currentRoute)} theme={customBtnDefault} className='w-full'>
                     Submit
                 </Button>
             ) : (
-                <LoadingBtn color='info' theme={customButtonDefault} className='w-full' />
+                <>{loadingBtn}</>
             )}
         </>
     )

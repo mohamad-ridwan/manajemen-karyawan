@@ -6,6 +6,7 @@ import ApolloWrapper from '@/lib/graphql/apolloWrapper'
 import WrapNotifAlert from '@/components/NotifAlert/WrapNotifAlert'
 import WrapNotifConnection from '@/components/NotifAlert/WrapNotifConnection'
 import WrapPopupModal from '@/components/Forms/WrapPopupModal'
+import { customPopupModal } from '@/components/CustomTheme'
 
 const inter = Roboto({ weight: ['400', '300', '500', '700'], subsets: [] })
 
@@ -33,7 +34,9 @@ export default async function RootLayout({
       <body className={inter.className}>
         <WrapContext>
           <ApolloWrapper>
-            <WrapPopupModal />
+            <WrapPopupModal
+              customPopupModal={customPopupModal}
+            />
             <WrapNotifAlert />
             <WrapNotifConnection />
             {children}

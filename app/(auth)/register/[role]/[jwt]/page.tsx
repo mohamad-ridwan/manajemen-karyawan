@@ -3,6 +3,11 @@ import Form from "./Form";
 import HeaderVerifikasi from "@/app/(auth)/lupa-password/ganti-password/[jwt]/HeaderVerifikasi";
 import { getClient } from "@/lib/client";
 import { verifySchemas } from "@/lib/graphql/schemas/verify";
+import LoadingBtn from "@/components/Loaders/LoadingBtn";
+import { classModalIcon, customButtonDefault, customInput, customSpinnerInfo } from "@/components/CustomTheme";
+import BtnBackOfForm from "@/components/Forms/BtnBackOfForm";
+import SkeletonVerify from "@/components/Loaders/SkeletonVerify";
+import Success from "@/app/(auth)/lupa-password/ganti-password/[jwt]/Success";
 
 export const dynamic = 'force-dynamic'
 
@@ -57,6 +62,34 @@ export default async function Verifikasi({
                     <HeaderVerifikasi
                         email={(data as { email: string })?.email}
                         title="Verifikasi Akun Admin"
+                    />
+                }
+                loadingBtnVerify={
+                    <LoadingBtn
+                        theme={customButtonDefault}
+                        color='info'
+                        className='w-full'
+                    />
+                }
+                btnBackVerify={
+                    <BtnBackOfForm
+                        href="/"
+                        btnName="Kembali ke Beranda"
+                    />
+                }
+                customInput={customInput}
+                customSpinnerInfo={customSpinnerInfo}
+                customBtnDefault={customButtonDefault}
+                skeletonVerify={
+                    <SkeletonVerify />
+                }
+                isSuccessVerify={
+                    <Success
+                        title="Akun berhasil di verifikasi."
+                        href="/"
+                        btnName="Kembali ke Beranda"
+                        customBtnDefault={customButtonDefault}
+                        classModalIcon={classModalIcon}
                     />
                 }
             />

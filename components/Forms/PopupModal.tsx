@@ -1,6 +1,5 @@
-import { Button, Modal } from "flowbite-react"
+import { Button, CustomFlowbiteTheme, Modal } from "flowbite-react"
 import { DataPopupModalT } from "@/utils/types"
-import { customPopupModal } from "../CustomTheme"
 
 export default function PopupModal({
     show,
@@ -10,8 +9,11 @@ export default function PopupModal({
     colorBtnSubmit = 'failure',
     nameBtnSubmit = 'Ya',
     clickNext,
-    clickCancel
-}: DataPopupModalT) {
+    clickCancel,
+    customPopupModal
+}: DataPopupModalT & {
+    customPopupModal: CustomFlowbiteTheme['modal']
+}) {
     return (
         <Modal
             show={show}

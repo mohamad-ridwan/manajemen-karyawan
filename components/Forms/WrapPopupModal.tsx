@@ -3,8 +3,15 @@
 import { useContext } from "react"
 import { NavigateContext } from "@/utils/context/NavigateContext"
 import PopupModal from "./PopupModal"
+import { CustomFlowbiteTheme } from "flowbite-react"
 
-export default function WrapPopupModal() {
+type Props = {
+    customPopupModal: CustomFlowbiteTheme['modal']
+}
+
+export default function WrapPopupModal({
+    customPopupModal
+}:Props) {
     const navigateContext = useContext(NavigateContext)
     const onPopupModal = navigateContext?.onPopupModal
 
@@ -20,6 +27,7 @@ export default function WrapPopupModal() {
                     nameBtnSubmit={onPopupModal.nameBtnSubmit}
                     clickNext={onPopupModal.clickNext}
                     clickCancel={onPopupModal.clickCancel}
+                    customPopupModal={customPopupModal}
                 />
             )}
         </>

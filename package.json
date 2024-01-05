@@ -12,6 +12,7 @@
     "@apollo/client": "^3.9.0-alpha.5",
     "@apollo/experimental-nextjs-app-support": "^0.5.2",
     "@emailjs/browser": "^3.11.0",
+    "browser-image-compression": "^2.0.2",
     "dayjs": "^1.11.10",
     "flowbite-react": "^0.7.2",
     "next": "14.0.4",

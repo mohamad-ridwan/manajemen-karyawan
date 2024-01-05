@@ -10,12 +10,14 @@ type Props = {
     headNavigation: ReactNode
     children?: ReactNode
     users: UsersT | "exp" | "network error" | null
+    skeletonNav: ReactNode
 }
 
 export default function WrapNavigation({
     headNavigation,
     children,
-    users
+    users,
+    skeletonNav
 }: Props) {
     const pathname = usePathname()
     const {
@@ -37,6 +39,7 @@ export default function WrapNavigation({
                         headNavigation={headNavigation}
                         activeSideBar={navigateContext?.activeSideBar as boolean}
                         closeNavigate={closeNavigate}
+                        skeletonNav={skeletonNav}
                     />
                 </>
             }

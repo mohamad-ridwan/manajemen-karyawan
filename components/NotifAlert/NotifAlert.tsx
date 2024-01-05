@@ -1,5 +1,5 @@
 import { DataNotifAlert } from "@/utils/types"
-import { Alert, CustomFlowbiteTheme } from "flowbite-react"
+import { Alert } from "flowbite-react"
 import { IoClose } from "react-icons/io5"
 
 type Props = DataNotifAlert

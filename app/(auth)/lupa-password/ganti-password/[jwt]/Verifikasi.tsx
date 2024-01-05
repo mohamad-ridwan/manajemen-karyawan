@@ -1,9 +1,6 @@
-import { ChangeEventHandler, KeyboardEventHandler } from "react";
+import { ChangeEventHandler, KeyboardEventHandler, ReactNode } from "react";
 import InputForm from "@/components/Forms/InputForm";
-import { Button, Spinner } from "flowbite-react";
-import LoadingBtn from "@/components/LoadingBtn";
-import { customButtonDefault, customSpinnerInfo } from "@/components/CustomTheme";
-import Link from "next/link";
+import { Button, CustomFlowbiteTheme, Spinner } from "flowbite-react";
 
 type Props = {
     kodeValue: string
@@ -14,6 +11,11 @@ type Props = {
     loadingResendMail: boolean
     loadingVerify: boolean
     pressEnter: KeyboardEventHandler<HTMLInputElement>
+    loadingBtnVerify: ReactNode
+    btnBackVerify: ReactNode
+    customInput: CustomFlowbiteTheme['textInput']
+    customSpinnerInfo: CustomFlowbiteTheme['spinner']
+    customBtnDefault: CustomFlowbiteTheme['button']
 }
 
 export default function Verifikasi({
@@ -24,7 +26,12 @@ export default function Verifikasi({
     clickSubmit,
     loadingResendMail,
     loadingVerify,
-    pressEnter
+    pressEnter,
+    loadingBtnVerify,
+    btnBackVerify,
+    customInput,
+    customSpinnerInfo,
+    customBtnDefault
 }: Props) {
     return (
         <>
@@ -40,6 +47,7 @@ export default function Verifikasi({
                 errMsg={errForm}
                 maxLength={4}
                 pressEnter={pressEnter}
+                customInput={customInput}
             />
 
             <div className='flex justify-end'>
@@ -51,19 +59,13 @@ export default function Verifikasi({
                 </button>
             </div>
             {!loadingVerify ? (
-                <Button onClick={clickSubmit} theme={customButtonDefault} className='w-full'>
+                <Button onClick={clickSubmit} theme={customBtnDefault} className='w-full'>
                     Verifikasi
                 </Button>
             ) : (
-                <LoadingBtn color='info' theme={customButtonDefault} className='w-full' />
+                <>{loadingBtnVerify}</>
             )}
-            <div className='flex justify-end'>
-                <Link href='/'>
-                    <button className='text-sm text-gray-text'>
-                        Kembali ke Beranda
-                    </button>
-                </Link>
-            </div>
+            {btnBackVerify}
         </>
     )
 }

@@ -1,16 +1,27 @@
 'use client'
 
+import { ReactNode } from "react";
 import UseRegister from "./UseRegister";
 import FormDaftarAkun from "./FormDaftarAkun";
 import ModalForm from "./ModalForm";
-import { SelectOptT } from "@/utils/types";
+import { CustomFlowbiteTheme } from "flowbite-react";
 
 type Props ={
     params: {role: string}
+    customInput: CustomFlowbiteTheme['textInput']
+    loadingBtn: ReactNode
+    customBtnDefault: CustomFlowbiteTheme['button']
+    btnBack: ReactNode
+    customPopupModal: CustomFlowbiteTheme['modal']
 }
 
 export default function WrapRegister({
-    params
+    params,
+    customInput,
+    loadingBtn,
+    customBtnDefault,
+    btnBack,
+    customPopupModal
 }: Props) {
     const {
         daftarAkunValue,
@@ -45,6 +56,9 @@ export default function WrapRegister({
                 formValue={formValue}
                 errForm={errForm}
                 onSelectedDateChanged={onSelectedDateChanged}
+                customInput={customInput}
+                customBtnDefault={customBtnDefault}
+                customPopupModal={customPopupModal}
             />
 
             <FormDaftarAkun
@@ -59,6 +73,10 @@ export default function WrapRegister({
                 clickSubmitFormAkun={clickSubmitFormAkun}
                 currentRoute={params?.role as 'Admin'}
                 clickFormDataKaryawan={clickFormDataKaryawan}
+                customInput={customInput}
+                loadingBtn={loadingBtn}
+                customBtnDefault={customBtnDefault}
+                btnBack={btnBack}
             />
         </>
     )

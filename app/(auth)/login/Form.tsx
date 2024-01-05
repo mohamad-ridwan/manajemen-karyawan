@@ -1,15 +1,27 @@
 'use client'
 
+import { ReactNode } from "react";
 import InputForm from "@/components/Forms/InputForm";
 import UseLogin from "./UseLogin";
 import { IoEyeSharp } from "react-icons/io5";
 import { HiMiniEyeSlash } from "react-icons/hi2";
-import Link from "next/link";
-import { Button } from "flowbite-react";
-import LoadingBtn from "@/components/LoadingBtn";
-import { customButtonDefault } from "@/components/CustomTheme";
+import { Button, CustomFlowbiteTheme } from "flowbite-react";
 
-export default function Form() {
+type Props = {
+    loadingBtn: ReactNode
+    btnLupaPw: ReactNode
+    customButtonDefault: CustomFlowbiteTheme['button']
+    customInput: CustomFlowbiteTheme['textInput']
+    customAlertFailure: CustomFlowbiteTheme['alert']
+}
+
+export default function Form({
+    loadingBtn,
+    btnLupaPw,
+    customButtonDefault,
+    customInput,
+    customAlertFailure
+}: Props) {
     const {
         loginValue,
         changeInput,
@@ -20,7 +32,9 @@ export default function Form() {
         clickSubmit,
         loading,
         usersContext
-    } = UseLogin()
+    } = UseLogin({
+        customAlertFailure
+    })
 
     return (
         <>
@@ -35,6 +49,7 @@ export default function Form() {
                 changeInput={changeInput}
                 errMsg={errForm.email}
                 pressEnter={pressEnter}
+                customInput={customInput}
             />
             <div className='relative items-center flex'>
                 <InputForm
@@ -49,6 +64,7 @@ export default function Form() {
                     changeInput={changeInput}
                     pressEnter={pressEnter}
                     errMsg={errForm.password}
+                    customInput={customInput}
                 />
 
                 <button className='absolute right-2' onClick={clickShowPw} style={{
@@ -66,17 +82,13 @@ export default function Form() {
                     )}
                 </button>
             </div>
-            <div className="flex items-center justify-end">
-                <Link href='/lupa-password' className='text-sm text-gray-text'>
-                    Lupa password?
-                </Link>
-            </div>
+            {btnLupaPw}
             {!usersContext?.loadingUsers && !loading ? (
                 <Button theme={customButtonDefault} onClick={clickSubmit} className='w-full'>
                     Login
                 </Button>
             ) : (
-                <LoadingBtn theme={customButtonDefault} color='info' className='w-full' />
+                <>{loadingBtn}</>
             )}
         </>
     )

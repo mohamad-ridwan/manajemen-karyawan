@@ -1,7 +1,6 @@
 import { ChangeEventHandler } from 'react';
-import { Label, Select } from 'flowbite-react';
+import { CustomFlowbiteTheme, Label, Select } from 'flowbite-react';
 import { SelectOptT } from '@/utils/types';
-import { customInput } from '../CustomTheme';
 
 type Props = {
     label?: string
@@ -15,6 +14,7 @@ type Props = {
     name?: string
     changeSelect: ChangeEventHandler<HTMLSelectElement>
     defaultValue?: string
+    customInput: CustomFlowbiteTheme['textInput']
 }
 
 export default function SelectInput({
@@ -28,7 +28,8 @@ export default function SelectInput({
     errMsg,
     name,
     changeSelect,
-    defaultValue
+    defaultValue,
+    customInput
 }: Props) {
     return (
         <div className={`flex flex-col ${classWrapp}`}>

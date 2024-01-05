@@ -4,6 +4,8 @@ import { ReactNode } from "react"
 import Verifikasi from "./Verifikasi"
 import UseGantiPassword from "./UseGantiPassword"
 import FormGantiPassword from "./FormGantiPassword"
+import { CustomFlowbiteTheme } from "flowbite-react"
+import { ClassModalIconT } from "@/utils/types"
 
 type DataT = { email: string, id: string } | 'exp' | 'network error'
 
@@ -12,13 +14,33 @@ type Props = {
     data: DataT
     header: ReactNode
     isSuccessResetPw?: ReactNode
+    loadingBtnVerify: ReactNode
+    skeletonVerify: ReactNode
+    btnBackVerify: ReactNode
+    btnBackGantiPw: ReactNode
+    customInput: CustomFlowbiteTheme['textInput']
+    customBtnDefault: CustomFlowbiteTheme['button']
+    customSpinnerInfo: CustomFlowbiteTheme['spinner']
+    classModalIcon: ClassModalIconT
+    customAlertFailure: CustomFlowbiteTheme['alert']
+    customAlertSuccess: CustomFlowbiteTheme['alert']
 }
 
 export default function WrapVerifikasi({
     children,
     header,
     data,
-    isSuccessResetPw
+    isSuccessResetPw,
+    loadingBtnVerify,
+    skeletonVerify,
+    btnBackVerify,
+    btnBackGantiPw,
+    customInput,
+    customBtnDefault,
+    customSpinnerInfo,
+    classModalIcon,
+    customAlertFailure,
+    customAlertSuccess
 }: Props) {
     const {
         kodeValue,
@@ -39,7 +61,13 @@ export default function WrapVerifikasi({
         loadingResetPw,
         successResetPw,
         pressEnter
-    } = UseGantiPassword(data)
+    } = UseGantiPassword({
+        classModalIcon,
+        customAlertFailure,
+        customAlertSuccess,
+        customButtonDefault: customBtnDefault,
+        data
+    })
 
     return (
         <>
@@ -55,21 +83,14 @@ export default function WrapVerifikasi({
                             clickSubmit={clickSubmit}
                             loadingResendMail={loadingResendMail}
                             loadingVerify={loadingVerify}
-                            pressEnter={(e)=>pressEnter(e, 'VERIFY')}
+                            pressEnter={(e) => pressEnter(e, 'VERIFY')}
+                            loadingBtnVerify={loadingBtnVerify}
+                            btnBackVerify={btnBackVerify}
+                            customInput={customInput}
+                            customBtnDefault={customBtnDefault}
+                            customSpinnerInfo={customSpinnerInfo}
                         /> :
-                        <div role="status" className="max-w-sm animate-pulse">
-                            <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
-                            <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px] mb-2.5"></div>
-                            <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"></div>
-                            <br />
-                            <div className="flex justify-end">
-                                <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-28 mb-4"></div>
-                            </div>
-                            <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
-                            <div className="flex justify-end">
-                                <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-24 mb-4"></div>
-                            </div>
-                        </div>
+                        <>{skeletonVerify}</>
                     }
                 </> : <FormGantiPassword
                     showNewPw={showNewPw}
@@ -80,10 +101,15 @@ export default function WrapVerifikasi({
                     clickShowPw={clickShowPw}
                     loadingSubmitGantiPw={loadingResetPw}
                     clickSubmitGantiPw={clickSubmitGantiPw}
-                    pressEnter={(e)=>pressEnter(e, 'RESET-PW')}
+                    pressEnter={(e) => pressEnter(e, 'RESET-PW')}
+                    loadingBtnGantiPw={loadingBtnVerify}
+                    btnBackGantiPw={btnBackGantiPw}
+                    customBtnDefault={customBtnDefault}
+                    customInput={customInput}
                 />}
             </> :
-                <>{isSuccessResetPw}</>}
+                <>{isSuccessResetPw}</>
+            }
         </>
     )
 }

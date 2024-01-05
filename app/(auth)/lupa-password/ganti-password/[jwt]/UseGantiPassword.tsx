@@ -1,17 +1,24 @@
 import React, { ChangeEvent, useContext, useEffect, useState } from "react"
-import { classModalIcon, customAlertFailure, customAlertSuccess, customButtonDefault } from "@/components/CustomTheme"
 import { queryEmailjs } from "@/lib/emailjs/querys"
 import sendMail from "@/lib/emailjs/sendMail"
 import { verifySchemas } from "@/lib/graphql/schemas/verify"
 import { NavigateContext } from "@/utils/context/NavigateContext"
-import { DataNotifAlert, DataPopupModalT } from "@/utils/types"
+import { ClassModalIconT, DataNotifAlert, DataPopupModalT } from "@/utils/types"
 import { useLazyQuery } from "@apollo/client"
 import { EmailJSResponseStatus } from "@emailjs/browser"
-import { Button } from "flowbite-react"
+import { Button, CustomFlowbiteTheme } from "flowbite-react"
 import { useParams, useRouter } from "next/navigation"
 import { MdOutlineMail } from "react-icons/md";
 import { IoKeyOutline } from "react-icons/io5";
 import { usersSchemas } from "@/lib/graphql/schemas/users"
+
+type Props = {
+    classModalIcon: ClassModalIconT
+    customAlertFailure: CustomFlowbiteTheme['alert']
+    customAlertSuccess: CustomFlowbiteTheme['alert']
+    customButtonDefault: CustomFlowbiteTheme['button']
+    data?: DataT
+}
 
 type DataT = { email: string, id: string } | 'exp' | 'network error'
 
@@ -29,9 +36,13 @@ type NewPasswordT = {
     confirmPassword: string
 }
 
-export default function UseGantiPassword(
-    data?: DataT
-) {
+export default function UseGantiPassword({
+    classModalIcon,
+    customAlertFailure,
+    customAlertSuccess,
+    customButtonDefault,
+    data
+}:Props) {
     const [kodeValue, setKodeValue] = useState<string>('')
     const [errForm, setErrForm] = useState<string>('')
     const [loadingResendMail, setLoadingResendMail] = useState<boolean>(false)
@@ -50,8 +61,6 @@ export default function UseGantiPassword(
     const router = useRouter()
     const params = useParams()
     const navigateContext = useContext(NavigateContext)
-
-    console.log(data)
 
     const [
         resendTokenResolver,
@@ -265,7 +274,7 @@ export default function UseGantiPassword(
                         <div className="mt-2 flex justify-end">
                             <Button theme={customButtonDefault} onClick={() => {
                                 navigateContext.setOnNotifAlert({} as DataNotifAlert)
-                                router.push('/login')
+                                router.push('/')
                             }}>
                                 Kembali
                             </Button>
@@ -274,7 +283,7 @@ export default function UseGantiPassword(
                     color: 'failure',
                     onDissmiss: () => {
                         navigateContext.setOnNotifAlert({} as DataNotifAlert)
-                        router.push('/login')
+                        router.push('/')
                     },
                     customTheme: customAlertFailure
                 })

@@ -6,14 +6,16 @@ import { UsersContext } from "@/utils/context/UsersContext"
 import { NavigateContext } from "@/utils/context/NavigateContext"
 import { DataNotifAlert, UsersT } from "@/utils/types"
 import { UseCookies } from "@/lib/useCookies"
-import { customAlertSuccess } from "@/components/CustomTheme"
+import { CustomFlowbiteTheme } from "flowbite-react"
 
 type Props = {
     users: UsersT | "exp" | "network error" | null
+    customAlertSuccess: CustomFlowbiteTheme['alert']
 }
 
 export default function AuthSession({
-    users
+    users,
+    customAlertSuccess
 }: Props) {
     const usersContext = useContext(UsersContext)
     const navigateContext = useContext(NavigateContext)

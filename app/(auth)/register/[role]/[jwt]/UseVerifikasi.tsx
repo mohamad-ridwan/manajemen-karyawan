@@ -190,7 +190,7 @@ export default function UseVerifikasi({
                         <div className="mt-2 flex justify-end">
                             <Button theme={customButtonDefault} onClick={() => {
                                 navigateContext.setOnNotifAlert({} as DataNotifAlert)
-                                router.push('/login')
+                                router.push('/')
                             }}>
                                 Kembali
                             </Button>
@@ -199,7 +199,7 @@ export default function UseVerifikasi({
                     color: 'failure',
                     onDissmiss: () => {
                         navigateContext.setOnNotifAlert({} as DataNotifAlert)
-                        router.push('/login')
+                        router.push('/')
                     },
                     customTheme: customAlertFailure
                 })
