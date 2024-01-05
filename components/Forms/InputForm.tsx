@@ -19,6 +19,7 @@ type Props = {
     placeholder?: string
     pressEnter?: KeyboardEventHandler<HTMLInputElement>
     customInput: CustomFlowbiteTheme['textInput']
+    onDisabled?: boolean
 }
 
 export default function InputForm({
@@ -37,7 +38,8 @@ export default function InputForm({
     placeholder,
     pressEnter,
     maxLength,
-    customInput
+    customInput,
+    onDisabled
 }: Props) {
     return (
         <div className={`flex flex-col ${classWrap}`}>
@@ -58,6 +60,7 @@ export default function InputForm({
                 theme={customInput}
                 maxLength={maxLength}
                 onKeyDown={pressEnter}
+                disabled={onDisabled}
             />
             <p className="text-red-600"><small>{errMsg}</small></p>
         </div>
