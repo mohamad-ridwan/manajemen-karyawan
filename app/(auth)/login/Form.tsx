@@ -6,6 +6,7 @@ import UseLogin from "./UseLogin";
 import { IoEyeSharp } from "react-icons/io5";
 import { HiMiniEyeSlash } from "react-icons/hi2";
 import { Button, CustomFlowbiteTheme } from "flowbite-react";
+import actionLogin from "./actionLogin";
 
 type Props = {
     loadingBtn: ReactNode
@@ -27,17 +28,19 @@ export default function Form({
         changeInput,
         errForm,
         showPw,
-        pressEnter,
+        // pressEnter,
         clickShowPw,
-        clickSubmit,
-        loading,
-        usersContext
+        // clickSubmit,
+        // loading,
+        usersContext,
+        formloginAction,
+        pending
     } = UseLogin({
         customAlertFailure
     })
 
     return (
-        <>
+        <form action={formloginAction} className="space-y-4 md:space-y-6">
             <InputForm
                 type='email'
                 name='email'
@@ -48,7 +51,8 @@ export default function Form({
                 classInput="mt-2"
                 changeInput={changeInput}
                 errMsg={errForm.email}
-                pressEnter={pressEnter}
+                onInputRequired={true}
+                // pressEnter={pressEnter}
                 customInput={customInput}
             />
             <div className='relative items-center flex'>
@@ -62,12 +66,13 @@ export default function Form({
                     classInput='w-full mt-2 relative'
                     classWrap='w-full'
                     changeInput={changeInput}
-                    pressEnter={pressEnter}
+                    onInputRequired={true}
+                    // pressEnter={pressEnter}
                     errMsg={errForm.password}
                     customInput={customInput}
                 />
 
-                <button className='absolute right-2' onClick={clickShowPw} style={{
+                <button type="button" className='absolute right-2' onClick={clickShowPw} style={{
                     marginTop: errForm?.password ? '0.5rem' : '1.7rem'
                 }}>
                     {showPw ? (
@@ -83,13 +88,18 @@ export default function Form({
                 </button>
             </div>
             {btnLupaPw}
-            {!usersContext?.loadingUsers && !loading ? (
-                <Button theme={customButtonDefault} onClick={clickSubmit} className='w-full'>
+            {!usersContext?.loadingUsers && !pending ? (
+                <Button
+                    type="submit"
+                    theme={customButtonDefault}
+                    // onClick={clickSubmit}
+                    className='w-full'
+                >
                     Login
                 </Button>
             ) : (
                 <>{loadingBtn}</>
             )}
-        </>
+        </form>
     )
 }
