@@ -3,7 +3,7 @@
 import { getClient } from "@/lib/client"
 import { usersSchemas } from "@/lib/graphql/schemas/users"
 import { ApolloError } from "@apollo/client"
-import { revalidatePath } from "next/cache"
+import { revalidateTag } from "next/cache"
 import {z} from 'zod'
 
 type LoginValueT = {
@@ -45,7 +45,7 @@ export default async function actionLogin(prevState: any, formData: FormData){
                 password
             }
         })
-        revalidatePath('/login')
+        revalidateTag('login-data')
         return {token: result.data.login.token, error: null}
     } catch (error) {
         const err = error as ApolloError

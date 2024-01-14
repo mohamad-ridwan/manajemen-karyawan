@@ -18,7 +18,7 @@ export default function NavigationItems({
 
     return (
         <Sidebar.Items>
-            <Sidebar.ItemGroup className="p-4">
+            <Sidebar.ItemGroup className="py-4">
                 {menuItems.length > 0 && menuItems.map((menu, i) => {
                     const isCollapseMenu = menu?.children
                     return (
