@@ -1,12 +1,12 @@
 'use client'
 
 import { ReactNode } from "react";
+import { Button, CustomFlowbiteTheme } from "flowbite-react";
+import { useFormStatus } from "react-dom";
 import InputForm from "@/components/Forms/InputForm";
 import UseLogin from "./UseLogin";
 import { IoEyeSharp } from "react-icons/io5";
 import { HiMiniEyeSlash } from "react-icons/hi2";
-import { Button, CustomFlowbiteTheme } from "flowbite-react";
-import actionLogin from "./actionLogin";
 
 type Props = {
     loadingBtn: ReactNode
@@ -14,6 +14,33 @@ type Props = {
     customButtonDefault: CustomFlowbiteTheme['button']
     customInput: CustomFlowbiteTheme['textInput']
     customAlertFailure: CustomFlowbiteTheme['alert']
+}
+
+function SubmitButton({
+    loadingBtn,
+    loadingUsers,
+    customButtonDefault
+}: {
+    loadingBtn: ReactNode
+    loadingUsers: boolean
+    customButtonDefault: CustomFlowbiteTheme['button']
+}) {
+    const { pending } = useFormStatus()
+    return (
+        <>
+            {!loadingUsers && !pending ? (
+                <Button
+                    type="submit"
+                    theme={customButtonDefault}
+                    className='w-full'
+                >
+                    Login
+                </Button>
+            ) : (
+                <>{loadingBtn}</>
+            )}
+        </>
+    )
 }
 
 export default function Form({
@@ -28,13 +55,9 @@ export default function Form({
         changeInput,
         errForm,
         showPw,
-        // pressEnter,
         clickShowPw,
-        // clickSubmit,
-        // loading,
         usersContext,
         formloginAction,
-        pending
     } = UseLogin({
         customAlertFailure
     })
@@ -52,7 +75,6 @@ export default function Form({
                 changeInput={changeInput}
                 errMsg={errForm.email}
                 onInputRequired={true}
-                // pressEnter={pressEnter}
                 customInput={customInput}
             />
             <div className='relative items-center flex'>
@@ -67,7 +89,6 @@ export default function Form({
                     classWrap='w-full'
                     changeInput={changeInput}
                     onInputRequired={true}
-                    // pressEnter={pressEnter}
                     errMsg={errForm.password}
                     customInput={customInput}
                 />
@@ -88,18 +109,11 @@ export default function Form({
                 </button>
             </div>
             {btnLupaPw}
-            {!usersContext?.loadingUsers && !pending ? (
-                <Button
-                    type="submit"
-                    theme={customButtonDefault}
-                    // onClick={clickSubmit}
-                    className='w-full'
-                >
-                    Login
-                </Button>
-            ) : (
-                <>{loadingBtn}</>
-            )}
+            <SubmitButton
+                customButtonDefault={customButtonDefault}
+                loadingBtn={loadingBtn}
+                loadingUsers={usersContext?.loadingUsers as boolean}
+            />
         </form>
     )
 }

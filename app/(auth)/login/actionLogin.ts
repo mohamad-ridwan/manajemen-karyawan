@@ -3,7 +3,7 @@
 import { getClient } from "@/lib/client"
 import { usersSchemas } from "@/lib/graphql/schemas/users"
 import { ApolloError } from "@apollo/client"
-import { revalidateTag } from "next/cache"
+import { revalidatePath } from "next/cache"
 import {z} from 'zod'
 
 type LoginValueT = {
@@ -25,10 +25,7 @@ export default async function actionLogin(prevState: any, formData: FormData){
         })
     })
 
-    const validateFields = schema.safeParse({
-        email: formData.get('email'),
-        password: formData.get('password')
-    })
+    const validateFields = schema.safeParse(Object.fromEntries(formData.entries()))
 
     const {
         email,
@@ -45,7 +42,7 @@ export default async function actionLogin(prevState: any, formData: FormData){
                 password
             }
         })
-        revalidateTag('login-data')
+        revalidatePath('/login')
         return {token: result.data.login.token, error: null}
     } catch (error) {
         const err = error as ApolloError
